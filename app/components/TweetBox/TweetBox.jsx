@@ -1,9 +1,21 @@
-import React from 'react'
+import React from 'react';
 
 class TweetBox extends React.Component {
   render() {
     return null;
-  } 
+  }
 }
 
-export default TweetBox
+class TweetBoxStatus extends React.Component {
+  render() {
+    return null;
+  }
+}
+
+class TweetBoxCounter extends React.Component {
+  render() {
+    return null;
+  }
+}
+
+export default TweetBox;
