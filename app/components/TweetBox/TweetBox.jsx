@@ -6,6 +6,8 @@ class TweetBox extends React.Component {
     this.state = { statusText: '' };
 
     this.setStatusText = this.setStatusText.bind(this);
+    this.submitTweet = this.submitTweet.bind(this);
+    this.statusTextValid = this.statusTextValid.bind(this);
   }
 
   setStatusText(event) {
@@ -13,11 +15,21 @@ class TweetBox extends React.Component {
     this.setState({ statusText: text });
   }
 
+  submitTweet() {
+    if (this.statusTextValid()) {
+      this.props.tweetSubmitted(this.state.statusText);
+    }
+  }
+
+  statusTextValid() {
+    return this.state.statusText.length > 0 && this.state.statusText <= 140;
+  }
+
   render() {
     return (<div>
         <TweetBoxStatus setStatusText={this.setStatusText} />
         <TweetBoxCounter statusText={this.state.statusText} />
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={this.submitTweet}>Submit</button>
       </div>);
     }
 }
