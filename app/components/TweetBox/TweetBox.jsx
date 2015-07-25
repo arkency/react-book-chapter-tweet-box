@@ -7,8 +7,12 @@ class TweetBox extends React.Component {
   }
 
   render() {
-    return null;
-  }
+    return (<div>
+        <TweetBoxStatus />
+        <TweetBoxCounter statusText={this.state.statusText} />
+        <button type="submit">Submit</button>
+      </div>);
+    }
 }
 
 class TweetBoxStatus extends React.Component {
