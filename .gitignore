@@ -15,4 +15,4 @@ coverage
 /public
 /builds
 
-.eslint
+.eslintrc
