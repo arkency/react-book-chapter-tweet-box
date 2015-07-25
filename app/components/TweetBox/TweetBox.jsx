@@ -42,8 +42,31 @@ class TweetBoxStatus extends React.Component {
 }
 
 class TweetBoxCounter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.counterStyles = this.counterStyles.bind(this);
+    this.remainingCharacters = this.remainingCharacters.bind(this);
+  }
+
+  counterStyles() {
+    let color = 'red';
+    let remainingCharacters = this.remainingCharacters();
+    if (remainingCharacters > 30) {
+      color = 'green';
+    } else if (remainingCharacters > 0) {
+      color = 'yellow';
+    }
+    return { color: color };
+  }
+
+  remainingCharacters() {
+    return 140 - this.props.statusText.length;
+  }
+
   render() {
-    return null;
+    return (
+      <span style={this.counterStyles()}>{this.remainingCharacters()}</span>
+    );
   }
 }
 
