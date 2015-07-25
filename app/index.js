@@ -22,3 +22,9 @@ document.body.appendChild(applicationNode);
 
 log('mounting application');
 
+let tweetSubmitted = (tweetData) => {
+  console.log("Tweet Submitted!");
+  console.log(tweetData);
+};
+
+React.render(<TweetBox tweetSubmitted={tweetSubmitted} />, applicationNode);
