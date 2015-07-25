@@ -1,6 +1,11 @@
 import React from 'react';
 
 class TweetBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { statusText: '' };
+  }
+
   render() {
     return null;
   }
