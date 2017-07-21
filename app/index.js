@@ -3,6 +3,7 @@ import './styles.css';
 
 import debug from 'debug';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import TweetBox from './components/TweetBox';
 
 const log = debug('application:bootstrap');
@@ -27,4 +28,4 @@ let tweetSubmitted = (tweetData) => {
   console.log(tweetData);
 };
 
-React.render(<TweetBox tweetSubmitted={tweetSubmitted} />, applicationNode);
+ReactDOM.render(<TweetBox tweetSubmitted={tweetSubmitted} />, applicationNode);
