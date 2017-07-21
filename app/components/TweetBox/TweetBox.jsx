@@ -35,10 +35,12 @@ class TweetBox extends React.Component {
 }
 
 class TweetBoxStatus extends React.Component {
-  return (
-      <textarea onChange={this.props.setStatusText}
-                placeholder="What's happening?" />
-  );
+  render() {
+    return (
+        <textarea onChange={this.props.setStatusText}
+                  placeholder="What's happening?" />
+    );
+  }
 }
 
 class TweetBoxCounter extends React.Component {
