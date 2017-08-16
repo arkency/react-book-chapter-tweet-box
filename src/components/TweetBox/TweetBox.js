@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 class TweetBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { statusText: '' };
+    this.state = { statusText: "" };
 
     this.setStatusText = this.setStatusText.bind(this);
     this.submitTweet = this.submitTweet.bind(this);
@@ -22,23 +22,31 @@ class TweetBox extends React.Component {
   }
 
   statusTextValid() {
-    return this.state.statusText.length > 0 && this.state.statusText.length <= 140;
+    return (
+      this.state.statusText.length > 0 && this.state.statusText.length <= 140
+    );
   }
 
   render() {
-    return (<div>
+    return (
+      <div>
         <TweetBoxStatus setStatusText={this.setStatusText} />
         <TweetBoxCounter statusText={this.state.statusText} />
-        <button type="submit" onClick={this.submitTweet}>Submit</button>
-      </div>);
-    }
+        <button type="submit" onClick={this.submitTweet}>
+          Submit
+        </button>
+      </div>
+    );
+  }
 }
 
 class TweetBoxStatus extends React.Component {
   render() {
     return (
-        <textarea onChange={this.props.setStatusText}
-                  placeholder="What's happening?" />
+      <textarea
+        onChange={this.props.setStatusText}
+        placeholder="What's happening?"
+      />
     );
   }
 }
@@ -51,12 +59,12 @@ class TweetBoxCounter extends React.Component {
   }
 
   counterStyles() {
-    let color = 'red';
+    let color = "red";
     let remainingCharacters = this.remainingCharacters();
     if (remainingCharacters > 30) {
-      color = 'green';
+      color = "green";
     } else if (remainingCharacters > 0) {
-      color = 'yellow';
+      color = "yellow";
     }
     return { color: color };
   }
@@ -67,7 +75,9 @@ class TweetBoxCounter extends React.Component {
 
   render() {
     return (
-      <span style={this.counterStyles()}>{this.remainingCharacters()}</span>
+      <span style={this.counterStyles()}>
+        {this.remainingCharacters()}
+      </span>
     );
   }
 }
