@@ -22,7 +22,7 @@ class TweetBox extends React.Component {
   }
 
   statusTextValid() {
-    return this.state.statusText.length > 0 && this.state.statusText <= 140;
+    return this.state.statusText.length > 0 && this.state.statusText.length <= 140;
   }
 
   render() {
