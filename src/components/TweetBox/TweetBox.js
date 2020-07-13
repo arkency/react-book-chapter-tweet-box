@@ -1,85 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 
-class TweetBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { statusText: "" };
+function TweetBox(props) {
+  const [statusText, updateStatusText] = useState("");
 
-    this.setStatusText = this.setStatusText.bind(this);
-    this.submitTweet = this.submitTweet.bind(this);
-    this.statusTextValid = this.statusTextValid.bind(this);
-  }
+  const setStatusText = event => {
+    const text = event.target.value;
+    updateStatusText(text);
+  };
 
-  setStatusText(event) {
-    let text = event.target.value;
-    this.setState({ statusText: text });
-  }
+  const statusTextValid = () =>
+    statusText.length > 0 && statusText.length <= 140;
 
-  submitTweet() {
-    if (this.statusTextValid()) {
-      this.props.tweetSubmitted(this.state.statusText);
+  const submitTweet = () => {
+    if (statusTextValid()) {
+      props.tweetSubmitted(statusText);
     }
-  }
+  };
 
-  statusTextValid() {
-    return (
-      this.state.statusText.length > 0 && this.state.statusText.length <= 140
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        <TweetBoxStatus setStatusText={this.setStatusText} />
-        <TweetBoxCounter statusText={this.state.statusText} />
-        <button type="submit" onClick={this.submitTweet}>
-          Submit
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <TweetBoxStatus setStatusText={setStatusText} />
+      <TweetBoxCounter statusText={statusText} />
+      <button type="submit" onClick={submitTweet}>
+        Submit
+      </button>
+    </div>
+  );
 }
 
-class TweetBoxStatus extends React.Component {
-  render() {
-    return (
-      <textarea
-        onChange={this.props.setStatusText}
-        placeholder="What's happening?"
-      />
-    );
-  }
+function TweetBoxStatus(props) {
+  return (
+    <textarea onChange={props.setStatusText} placeholder="What's happening?" />
+  );
 }
 
-class TweetBoxCounter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.counterStyles = this.counterStyles.bind(this);
-    this.remainingCharacters = this.remainingCharacters.bind(this);
-  }
+function TweetBoxCounter(props) {
+  const calculateRemainingCharacters = () => {
+    return 140 - props.statusText.length;
+  };
 
-  counterStyles() {
+  const counterStyles = () => {
     let color = "red";
-    let remainingCharacters = this.remainingCharacters();
+    const remainingCharacters = calculateRemainingCharacters();
     if (remainingCharacters > 30) {
       color = "green";
     } else if (remainingCharacters > 0) {
       color = "yellow";
     }
     return { color: color };
-  }
+  };
 
-  remainingCharacters() {
-    return 140 - this.props.statusText.length;
-  }
-
-  render() {
-    return (
-      <span style={this.counterStyles()}>
-        {this.remainingCharacters()}
-      </span>
-    );
-  }
+  return <span style={counterStyles()}>{calculateRemainingCharacters()}</span>;
 }
 
 export default TweetBox;
